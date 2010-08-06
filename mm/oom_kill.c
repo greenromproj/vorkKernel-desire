@@ -422,7 +422,27 @@ static int oom_kill_task(struct task_struct *p, struct mem_cgroup *mem)
 	 * all the memory it needs. That way it should be able to
 	 * exit() and clear out its resources quickly...
 	 */
-	boost_dying_task_prio(p, mem);
+	 
+	set_oom_timeslice(p);
+	set_tsk_thread_flag(p, TIF_MEMDIE);
+
+	force_sig(SIGKILL, p);
+}
+
+static int oom_kill_task(struct task_struct *p)
+{
+	/* WARNING: mm may not be dereferenced since we did not obtain its
+	 * value from get_task_mm(p).  This is OK since all we need to do is
+	 * compare mm to q->mm below.
+	 *
+	 * Furthermore, even if mm contains a non-NULL value, p->mm may
+	 * change to NULL at any time since we do not hold task_lock(p).
+	 * However, this is of no concern to us.
+	 */
+	if (!p->mm || p->signal->oom_adj == OOM_DISABLE)
+		return 1;
+
+	__oom_kill_task(p, 1);
 
 	return 0;
 }
