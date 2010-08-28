@@ -1644,7 +1644,6 @@ static inline void sched_wake_interactive_disable(void)
 {
 	current->sched_wake_interactive--;
 }
-#endif
 
 static inline void sched_wake_timer_enable(void)
 {
@@ -1655,6 +1654,7 @@ static inline void sched_wake_timer_disable(void)
 {
 	current->sched_wake_timer--;
 }
+#endif
 
 /* Future-safe accessor for struct task_struct's cpus_allowed. */
 #define tsk_cpus_allowed(tsk) (&(tsk)->cpus_allowed)
