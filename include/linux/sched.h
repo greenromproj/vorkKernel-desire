@@ -1212,7 +1212,7 @@ struct task_struct {
 	int prio, static_prio, normal_prio;
 	unsigned int rt_priority;
 #ifdef CONFIG_SCHED_BFS
-	int time_slice, first_time_slice;
+	int time_slice;
 	u64 deadline;
 	struct list_head run_list;
 	u64 last_ran;
@@ -1572,7 +1572,7 @@ static inline void tsk_cpus_current(struct task_struct *p)
 
 static inline void print_scheduler_version(void)
 {
-	printk(KERN_INFO"BFS CPU scheduler v0.330 by Con Kolivas.\n");
+	printk(KERN_INFO"BFS CPU scheduler v0.350 by Con Kolivas.\n");
 }
 
 static inline int iso_task(struct task_struct *p)
