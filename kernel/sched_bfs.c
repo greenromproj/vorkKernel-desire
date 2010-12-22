@@ -1365,10 +1365,10 @@ static void try_preempt(struct task_struct *p, struct rq *this_rq)
 		return;
 	}
 
-	if (online_cpus(p))
+	if (likely(online_cpus(p)))
 		cpus_and(tmp, cpu_online_map, p->cpus_allowed);
 	else
-		(cpumask_copy(&tmp, &cpu_online_map));
+		return;
 
 	latest_deadline = 0;
 	highest_prio = -1;
@@ -2786,7 +2786,7 @@ need_resched_nonpreemptible:
 		prev->last_ran = rq->clock;
 
 		/* Task changed affinity off this CPU */
-		if (needs_other_cpu(prev, cpu))
+		if (unlikely(!cpu_isset(cpu, prev->cpus_allowed)))
 			resched_suitable_idle(prev);
 		else if (!deactivate) {
 			if (!queued_notrunning()) {
