@@ -14,11 +14,21 @@
  */
 
 
-#ifndef __YAFFS_TAGS_VALIDITY_H__
-#define __YAFFS_TAGS_VALIDITY_H__
+#ifndef __YAFFS_QSORT_H__
+#define __YAFFS_QSORT_H__
 
-#include "yaffs_guts.h"
+#ifdef __KERNEL__
+#include <linux/sort.h>
 
-void yaffs_InitialiseTags(yaffs_ExtendedTags *tags);
-int yaffs_ValidateTags(yaffs_ExtendedTags *tags);
+extern void yaffs_qsort(void *const base, size_t total_elems, size_t size,
+			int (*cmp)(const void *, const void *)){
+	sort(base, total_elems, size, cmp, NULL);
+}
+
+#else
+
+extern void yaffs_qsort(void *const base, size_t total_elems, size_t size,
+			int (*cmp)(const void *, const void *));
+
+#endif
 #endif
