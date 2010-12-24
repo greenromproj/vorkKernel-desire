@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Linux kernel version: 2.6.35.9
-# Fri Dec 24 14:22:44 2010
+# Fri Dec 24 20:41:08 2010
 #
 CONFIG_ARM=y
 CONFIG_SYS_SUPPORTS_APM_EMULATION=y
@@ -82,7 +82,6 @@ CONFIG_CGROUPS=y
 # CONFIG_CPUSETS is not set
 # CONFIG_RESOURCE_COUNTERS is not set
 # CONFIG_BLK_CGROUP is not set
-# CONFIG_SCHED_AUTOGROUP is not set
 # CONFIG_SYSFS_DEPRECATED_V2 is not set
 # CONFIG_RELAY is not set
 # CONFIG_NAMESPACES is not set
@@ -1028,7 +1027,7 @@ CONFIG_NETDEV_1000=y
 CONFIG_NETDEV_10000=y
 CONFIG_WLAN=y
 CONFIG_BCM4329=m
-CONFIG_BCM4329_FW_PATH="/system/etc/firmware/fw_bcm4329.bin"
+CONFIG_BCM4329_FW_PATH="/system/vendor/firmware/fw_bcm4329.bin"
 CONFIG_BCM4329_NVRAM_PATH="/proc/calibration"
 CONFIG_BCM4329_ENABLE_CSCAN=y
 # CONFIG_HOSTAP is not set
