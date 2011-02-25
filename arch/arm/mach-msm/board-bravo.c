@@ -611,13 +611,13 @@ static struct msm_camera_device_platform_data msm_camera_device_data = {
 	.ioext.appsz  = MSM_CLK_CTL_SIZE,
 };
 
-static struct camera_flash_cfg msm_camera_sensor_flash_cfg = {
-	.camera_flash		= flashlight_control,
-	.num_flash_levels	= FLASHLIGHT_NUM,
-	.low_temp_limit		= 5,
-	.low_cap_limit		= 15,
-};
-
+/*static struct camera_flash_cfg msm_camera_sensor_flash_cfg = {
+*	.camera_flash		= flashlight_control,
+*	.num_flash_levels	= FLASHLIGHT_NUM,
+*	.low_temp_limit		= 5,
+*	.low_cap_limit		= 15,
+*};
+*/
 static struct msm_camera_sensor_info msm_camera_sensor_s5k3e2fx_data = {
 	.sensor_name 	= "s5k3e2fx",
 	.sensor_reset 	= 144,  /* CAM1_RST */
@@ -626,7 +626,8 @@ static struct msm_camera_sensor_info msm_camera_sensor_s5k3e2fx_data = {
 	.pdata 		= &msm_camera_device_data,
 	.resource 	= msm_camera_resources,
 	.num_resources 	= ARRAY_SIZE(msm_camera_resources),
-	.flash_cfg	= &msm_camera_sensor_flash_cfg,
+	.camera_flash = flashlight_control,
+	.num_flash_levels = FLASHLIGHT_NUM,
 };
 
 static struct platform_device msm_camera_sensor_s5k3e2fx = {
