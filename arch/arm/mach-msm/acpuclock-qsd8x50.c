@@ -84,6 +84,67 @@ struct regulator {
 #define SRC_AXI		2 /* 128 MHz */
 #define SRC_PLL1	3 /* 768 MHz */
 
+#if defined(CONFIG_SVS_900)
+struct clkctl_acpu_speed acpu_freq_tbl[] = {
+        {  19200, CCTL(CLK_TCXO, 1),            SRC_RAW, 0, 0, 900, 14000 },
+        { 128000, CCTL(CLK_TCXO, 1),            SRC_AXI, 0, 0, 900, 14000 },
+        { 245000, CCTL(CLK_MODEM_PLL, 1),       SRC_RAW, 0, 0, 925, 29000 },
+        /* Work arround for acpu resume hung, GPLL is turn off by arm9 */
+        /*{ 256000, CCTL(CLK_GLOBAL_PLL, 3),      SRC_RAW, 0, 0, 950, 29000 },*/
+        { 384000, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x0A, 0, 950, 58000 },
+        { 422400, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x0B, 0, 975, 117000 },
+        { 460800, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x0C, 0, 1000, 117000 },
+        { 499200, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x0D, 0, 1025, 117000 },
+        { 537600, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x0E, 0, 1050, 117000 },
+        { 576000, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x0F, 0, 1075, 117000 },
+        { 614400, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x10, 0, 1075, 117000 },
+        { 652800, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x11, 0, 1100, 117000 },
+        { 691200, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x12, 0, 1125, 117000 },
+        { 729600, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x13, 0, 1150, 117000 },
+        { 768000, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x14, 0, 1175, 128000 },
+        { 806400, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x15, 0, 1200, 128000 },
+        { 844800, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x16, 0, 1225, 128000 },
+        { 883200, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x17, 0, 1225, 128000 },
+        { 921600, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x18, 0, 1250, 128000 },
+        { 960000, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x19, 0, 1250, 128000 },
+        { 998400, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x1A, 0, 1275, 128000 },
+	{ 1036800, CCTL(CLK_TCXO, 1),		SRC_SCPLL, 0x1B, 0, 1300, 128000 },
+	{ 1075200, CCTL(CLK_TCXO, 1),		SRC_SCPLL, 0x1C, 0, 1325, 128000 },
+	{ 1113600, CCTL(CLK_TCXO, 1),		SRC_SCPLL, 0x1D, 0, 1325, 128000 },
+	{ 1152000, CCTL(CLK_TCXO, 1),       	SRC_SCPLL, 0x1E, 0, 1325, 128000 },
+	{ 0 },
+};
+#elif defined(CONFIG_SVS_925)
+struct clkctl_acpu_speed acpu_freq_tbl[] = {
+        {  19200, CCTL(CLK_TCXO, 1),            SRC_RAW, 0, 0, 925, 14000 },
+        { 128000, CCTL(CLK_TCXO, 1),            SRC_AXI, 0, 0, 925, 14000 },
+        { 245000, CCTL(CLK_MODEM_PLL, 1),       SRC_RAW, 0, 0, 950, 29000 },
+        /* Work arround for acpu resume hung, GPLL is turn off by arm9 */
+        /*{ 256000, CCTL(CLK_GLOBAL_PLL, 3),      SRC_RAW, 0, 0, 1000, 29000 },*/
+        { 384000, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x0A, 0, 1000, 58000 },
+        { 422400, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x0B, 0, 1025, 117000 },
+        { 460800, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x0C, 0, 1050, 117000 },
+        { 499200, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x0D, 0, 1075, 117000 },
+        { 537600, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x0E, 0, 1100, 117000 },
+        { 576000, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x0F, 0, 1125, 117000 },
+        { 614400, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x10, 0, 1125, 117000 },
+        { 652800, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x11, 0, 1150, 117000 },
+        { 691200, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x12, 0, 1175, 117000 },
+        { 729600, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x13, 0, 1200, 117000 },
+        { 768000, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x14, 0, 1225, 128000 },
+        { 806400, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x15, 0, 1250, 128000 },
+        { 844800, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x16, 0, 1275, 128000 },
+        { 883200, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x17, 0, 1275, 128000 },
+        { 921600, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x18, 0, 1300, 128000 },
+        { 960000, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x19, 0, 1300, 128000 },
+        { 998400, CCTL(CLK_TCXO, 1),            SRC_SCPLL, 0x1A, 0, 1300, 128000 },
+	{ 1036800, CCTL(CLK_TCXO, 1),		SRC_SCPLL, 0x1B, 0, 1325, 128000 },
+	{ 1075200, CCTL(CLK_TCXO, 1),		SRC_SCPLL, 0x1C, 0, 1325, 128000 },
+	{ 1113600, CCTL(CLK_TCXO, 1),		SRC_SCPLL, 0x1D, 0, 1325, 128000 },
+	{ 1152000, CCTL(CLK_TCXO, 1),       	SRC_SCPLL, 0x1E, 0, 1325, 128000 },
+	{ 0 },
+};
+#else
 struct clkctl_acpu_speed acpu_freq_tbl[] = {
         {  19200, CCTL(CLK_TCXO, 1),            SRC_RAW, 0, 0, 975, 14000 },
         { 128000, CCTL(CLK_TCXO, 1),            SRC_AXI, 0, 0, 975, 14000 },
@@ -113,6 +174,7 @@ struct clkctl_acpu_speed acpu_freq_tbl[] = {
 	{ 1152000, CCTL(CLK_TCXO, 1),       	SRC_SCPLL, 0x1E, 0, 1325, 128000 },
 	{ 0 },
 };
+#endif
 
 /* select the standby clock that is used when switching scpll
  * frequencies
@@ -490,15 +552,15 @@ static void __init acpuclk_init(void)
 		BUG();
 	}
 
-	/* Move to 806MHz for boot, which is a safe frequency
+	/* Move to 921MHz for boot, which is a safe frequency
 	 * for all versions of Scorpion at the moment.
 	 */
 	speed = acpu_freq_tbl;
 	for (;;) {
-		if (speed->acpu_khz == 806400)
+		if (speed->acpu_khz == 921600)
 			break;
 		if (speed->acpu_khz == 0) {
-			pr_err("acpuclk_init: cannot find 806MHz\n");
+			pr_err("acpuclk_init: cannot find 921MHz\n");
 			BUG();
 		}
 		speed++;

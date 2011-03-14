@@ -571,6 +571,38 @@ config MSM_AVS_HW
 	  fine tune the voltages based on the feedback from the ring
 	  oscillators.
 
+choice    
+	prompt "AVS min voltage"
+	default SVS_975
+	help
+	  Choose which minimum voltage you want to use.
+	
+	config SVS_975
+		depends on !MSM_CPU_AVS
+		bool "SVS with 975mv. Stock voltage"
+
+	config SVS_925
+		depends on !MSM_CPU_AVS
+		bool "SVS with 925mv. Could cause reboots"
+
+	config SVS_900
+		depends on !MSM_CPU_AVS
+		bool "SVS with 900mv. Could cause reboots"
+
+	config AVS_925
+		depends on MSM_CPU_AVS
+		bool "925mv min voltage"
+
+	config AVS_900
+		depends on MSM_CPU_AVS
+		bool "900mv min voltage. Could cause reboots"
+
+	config AVS_875
+		depends on MSM_CPU_AVS
+		bool "875mv min voltage. Could cause reboots"
+          
+endchoice
+
 config MSM_HW3D
 	tristate "MSM Hardware 3D Register Driver"
 	depends on EARLYSUSPEND
