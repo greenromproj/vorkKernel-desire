@@ -1,6 +1,6 @@
 #!/bin/bash
 # Only change these 2 paths if you want to compile a kernel on your own
-export ARM_EABI=/home/vork/prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin/arm-eabi-
+export ARM_EABI=/home/vork/prebuilt/linux-x86/toolchain/arm-eabi-4.4.0/bin/arm-eabi-
 export BUILD_DIR=~/Dropbox/Public
 
 kernelconfig=`cat Tools/misc/config`
