@@ -12,15 +12,16 @@ make ARCH=arm CROSS_COMPILE=$ARM_EABI INSTALL_MOD_PATH=$DIR/Tools/AnyKernel/syst
 
 # build date
 # NOW=$(date +"%d-%b-%y")
- linux version + localversion
+# linux version + localversion
  localVersion=`cat .config | fgrep CONFIG_LOCALVERSION= | cut -f 2 -d= | sed s/\"//g`
  linuxVersion=`cat .config | fgrep "Linux/arm " | cut -d: -f 1 | cut -c13-20`
  VERSION=$linuxVersion$localVersion
 
 if grep -q TESTVR arch/arm/configs/vorkKernelSVS_bravo_defconfig
-	$subdir=TEST
+then
+	subdir=test
 else
-	$subdir=download
+	subdir=download
 fi
 
 # CPU/SLAB/IO

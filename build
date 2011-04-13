@@ -30,13 +30,13 @@ read BUILD
 case $BUILD in
         1)
             	echo "Building SVS 925mv CFS"
-                make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernel_bravo_defconfig
+                make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernelSVS_bravo_defconfig
 		signed_file=vorkKernel$GC$CAM-SVS-CFS.zip
                 . compile.sh
                 ;;
         2)
             	echo "Building SVS CFS with vdd sysfs interface"
-                make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernel_bravo_defconfig
+                make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernelSVSADV_bravo_defconfig
 		signed_file=vorkKernel$GC$CAM-SVS-CFS-ADV.zip
                 . compile.sh
                 ;;
@@ -86,8 +86,10 @@ case $BUILD in
 			10)
 				NOW=$(date +"%d%m%y")
 				sed -i 's/TESTVR/'$NOW'/g' arch/arm/configs/vorkKernel*
+				;;
 			11)
 				sed -i 's/-vorkKernel-.*/-vorkKernel-TESTVR/g' arch/arm/configs/vorkKernel*
+				;;
 			*) echo "Error";;
 		esac
 		;;
