@@ -19,7 +19,7 @@ clear
 
 echo "----------------------------------------"
 echo "Building for:" $kernelconfig
-echo "1 - SVS CFS 925mv@1289Mhz"
+echo "1 - SVS CFS 925mv@128Mhz"
 echo ""
 echo "2 - SVS CFS ADVANCED (vdd sysfs interface)"
 echo ""
@@ -86,9 +86,11 @@ case $BUILD in
 			10)
 				NOW=$(date +"%d%m%y")
 				sed -i 's/TESTVR/'$NOW'/g' arch/arm/configs/vorkKernel*
+				. build
 				;;
 			11)
-				sed -i 's/-vorkKernel-.*/-vorkKernel-TESTVR/g' arch/arm/configs/vorkKernel*
+				sed -i 's/-vorkKernel-.*/-vorkKernel-TESTVR"/g' arch/arm/configs/vorkKernel*
+				. build
 				;;
 			*) echo "Error";;
 		esac
