@@ -182,4 +182,7 @@
 
 #define is_cdma_version(rev) (rev == 0x05)
 
+#define BRAVO_TPS65023_MIN_UV_MV    (800)
+#define BRAVO_TPS65023_MAX_UV_MV    (1350)
+
 #endif /* __ARCH_ARM_MACH_MSM_BOARD_BRAVO_H */

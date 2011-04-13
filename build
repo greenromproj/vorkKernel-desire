@@ -19,113 +19,28 @@ clear
 
 echo "----------------------------------------"
 echo "Building for:" $kernelconfig
-echo "1 - HAVS 875mv - BFS"
-echo "2 - HAVS 900mv - BFS"
-echo "3 - HAVS 925mv - BFS"
-echo
-echo "4 - HAVS 875mv - CFS"
-echo "5 - HAVS 900mv - CFS"
-echo "6 - HAVS 925mv - CFS"
-echo
-echo "7 - SVS 975mv (stock) - BFS"
-echo "8 - SVS 925mv - BFS"
-echo "9 - SVS 900mv - BFS"
-echo
-echo "10 - SVS 975mv (stock) - CFS"
-echo "11 - SVS 925mv - CFS"
-echo "12 - SVS 900mv - CFS"
-echo
-echo "13 - all - not implemented yet"
-echo "14 - Exit"
-echo "0 - GSM/CDMA and cam toggle"
+echo "1 - SVS CFS 925mv@1289Mhz"
+echo ""
+echo "2 - SVS CFS ADVANCED (vdd sysfs interface)"
+echo ""
+echo "10 - GSM/CDMA and cam toggle"
+echo "0 - Exit"
 echo "----------------------------------------"
 read BUILD
 case $BUILD in
         1)
-            	echo "Building HAVS 875mv BFS"
+            	echo "Building SVS 925mv CFS"
                 make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernel_bravo_defconfig
-                old_voltage=`cat .config | grep CONFIG_AVS_...=y | cut -c12-14`
-                sed -i 's/CONFIG_AVS_'$old_voltage'=y/# CONFIG_AVS_'$old_voltage' is not set/g' .config
-                sed -i 's/# CONFIG_AVS_875 is not set/CONFIG_AVS_875=y/g' .config
+		signed_file=vorkKernel$GC$CAM-SVS-CFS.zip
                 . compile.sh
                 ;;
         2)
-            	echo "Building HAVS 900mv BFS"
+            	echo "Building SVS CFS with vdd sysfs interface"
                 make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernel_bravo_defconfig
-                old_voltage=`cat .config | grep CONFIG_AVS_...=y | cut -c12-14`
-                sed -i 's/CONFIG_AVS_'$old_voltage'=y/# CONFIG_AVS_'$old_voltage' is not set/g' .config
-                sed -i 's/# CONFIG_AVS_900 is not set/CONFIG_AVS_900=y/g' .config
+		signed_file=vorkKernel$GC$CAM-SVS-CFS-ADV.zip
                 . compile.sh
                 ;;
-        3)
-            	echo "Building HAVS 925mv BFS"
-                make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernel_bravo_defconfig
-                . compile.sh
-                ;;
-        4) 
-            	echo "Building HAVS 875mv CFS"
-        	make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernelCFS_bravo_defconfig
-                old_voltage=`cat .config | grep CONFIG_AVS_...=y | cut -c12-14`
-                sed -i 's/CONFIG_AVS_'$old_voltage'=y/# CONFIG_AVS_'$old_voltage' is not set/g' .config
-                sed -i 's/# CONFIG_AVS_875 is not set/CONFIG_AVS_875=y/g' .config
-        	. compile.sh
-                ;;  
-        5) 
-            	echo "Building HAVS 900mv CFS"
-        	make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernelCFS_bravo_defconfig
-                old_voltage=`cat .config | grep CONFIG_AVS_...=y | cut -c12-14`
-                sed -i 's/CONFIG_AVS_'$old_voltage'=y/# CONFIG_AVS_'$old_voltage' is not set/g' .config
-                sed -i 's/# CONFIG_AVS_900 is not set/CONFIG_AVS_900=y/g' .config
-        	. compile.sh
-                ;; 
-        6) 
-            	echo "Building HAVS 925mv CFS"
-        	make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernelCFS_bravo_defconfig
-        	. compile.sh
-                ;; 
-        7)
-            	echo "Building SVS 975mv BFS"
-                make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernelSVS_bravo_defconfig
-                . compile.sh
-                ;;
-        8)
-            	echo "Building SVS 925mv BFS"
-                make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernelSVS_bravo_defconfig
-                . compile.sh
-		old_voltage=`cat .config | grep CONFIG_SVS_...=y | cut -c12-14`
-                sed -i 's/CONFIG_SVS_'$old_voltage'=y/# CONFIG_SVS_'$old_voltage' is not set/g' .config
-                sed -i 's/# CONFIG_SVS_925 is not set/CONFIG_SVS_925=y/g' .config
-                ;;
-        9)
-            	echo "Building SVS 900mv BFS"
-                make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernelSVS_bravo_defconfig
-                . compile.sh
-		old_voltage=`cat .config | grep CONFIG_SVS_...=y | cut -c12-14`
-                sed -i 's/CONFIG_SVS_'$old_voltage'=y/# CONFIG_SVS_'$old_voltage' is not set/g' .config
-                sed -i 's/# CONFIG_SVS_900 is not set/CONFIG_SVS_900=y/g' .config
-                ;;
-        10) 
-            	echo "Building SVS 975mv CFS"
-        	make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernelCFSSVS_bravo_defconfig
-        	. compile.sh
-                ;;
-        11) 
-            	echo "Building SVS 925mv CFS"
-        	make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernelCFSSVS_bravo_defconfig
-        	. compile.sh
-		old_voltage=`cat .config | grep CONFIG_SVS_...=y | cut -c12-14`
-                sed -i 's/CONFIG_SVS_'$old_voltage'=y/# CONFIG_SVS_'$old_voltage' is not set/g' .config
-                sed -i 's/# CONFIG_SVS_925 is not set/CONFIG_SVS_925=y/g' .config
-                ;;
-       	12) 
-            	echo "Building SVS 900mv CFS"
-        	make ARCH=arm CROSS_COMPILE=$ARM_EABI vorkKernelCFSSVS_bravo_defconfig
-        	. compile.sh
-		old_voltage=`cat .config | grep CONFIG_SVS_...=y | cut -c12-14`
-                sed -i 's/CONFIG_SVS_'$old_voltage'=y/# CONFIG_SVS_'$old_voltage' is not set/g' .config
-                sed -i 's/# CONFIG_SVS_900 is not set/CONFIG_SVS_900=y/g' .config
-                ;;
-	0)
+	10)
 		clear
 		echo "----------------------------------------"
 		echo "Currently building for a" $kernelconfig "Rom"		
@@ -168,9 +83,14 @@ case $BUILD in
 			3)
 				. build
 				;;
+			10)
+				NOW=$(date +"%d%m%y")
+				sed -i 's/TESTVR/'$NOW'/g' arch/arm/configs/vorkKernel*
+			11)
+				sed -i 's/-vorkKernel-.*/-vorkKernel-TESTVR/g' arch/arm/configs/vorkKernel*
 			*) echo "Error";;
 		esac
 		;;
-	14) clear ;;
+	0) clear ;;
         *) echo "Error";;
 esac
